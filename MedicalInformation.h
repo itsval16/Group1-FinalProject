@@ -11,10 +11,11 @@ class MedicalInformation {
 	private:
 		static fstream medicalInfo;
 	public:
-		void addInformation();
+		void addInformation(const string& info);
 		void modifyInformation();
 		void getInformation();
 };
 
 #endif
+
 
