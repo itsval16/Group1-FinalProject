@@ -5,7 +5,7 @@
 MedicalInformation::addInformation(const string& info){
 	medicalInfo.open("patientsInfo.txt", ios::app); // opens patientsInfo.txt if it exists or creates patientsInfo.txt if it doens't exist for appending information
 	
-	// Checks if the file is opened, returns an error if it isn't
+	// Checks if the file is opened, returns a error if it isn't
 	if (!medicalInfo){
 	    cerr << "Medical Information could not be opened" << endl;
 	    return;
@@ -17,3 +17,29 @@ MedicalInformation::addInformation(const string& info){
 	
 }
 
+MedicalInformation::getInformation(const string& dob){
+    medicalInfo.open("patientsInfo.txt",ios::in);
+    
+    // Checks if the file is opened, returns a error if it isn't
+	if (!medicalInfo){
+	    cerr << "Medical Information could not be opened" << endl;
+	    return;
+    }
+    
+    string line;
+    bool found = false;
+    
+    while (getline(medicalInfo,line)){
+        if(line.find(dob) != string::npos){ // looks for the line with dob and checks that it exists
+            cout << line << endl;
+            found = true;
+            break;
+        }
+    }
+    
+    if (!found){
+        cout << "Information not found" << endl;
+    }
+    
+    medicalInfo.close();
+}
