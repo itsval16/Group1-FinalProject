@@ -12,11 +12,12 @@ class MedicalInformation {
 		static fstream medicalInfo;
 	public:
 		void addInformation(const string& info);
-		void modifyInformation(const string& dob);
-		void getInformation();
+		void modifyInformation();
+		void getInformation(const string& dob);
 };
 
 #endif
+
 
 
 
