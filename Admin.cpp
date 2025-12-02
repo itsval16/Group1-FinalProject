@@ -1,50 +1,53 @@
 #include "Admin.h"
-#include <fstream>
 #include <vector>
 
-// Constructor sets up the admin's name and ID
+// Constructor initializes admin name and ID
 Admin::Admin(string name, int id) {
     adminName = name;
     adminID = id;
 }
 
-// Adds a doctor to the file using the MedicalInformation class
+// Adds a doctor to the system file
 void Admin::addDoctor(const string& doctorInfo) {
     cout << "Adding doctor to system..." << endl;
 
-    // Adds the doctor's information to patientsInfo.txt
+    // Uses MedicalInformation's add function
     medInfo.addInformation(doctorInfo);
 
     cout << "Doctor added successfully.\n";
 }
 
-// Removes a doctor by rewriting the file without that doctor's name
+// Removes a doctor by rewriting the file without their name
 void Admin::removeDoctor(const string& doctorName) {
     fstream file("patientsInfo.txt", ios::in);
-
-    // Check if the file opened correctly
+    
     if (!file) {
-        cerr << "Medical Information could not be opened" << endl;
+        cerr << "File could not be opened.\n";
         return;
     }
 
     vector<string> lines;
     string line;
 
-    // Read every line and keep only lines that DO NOT belong to the doctor
+    // Read file and store only lines that do NOT contain the doctor name
     while (getline(file, line)) {
-        if (line.find(doctorName) == string::npos) {
-            lines.push_back(line); // keep the line
+        if (line.find(doctorName) == string::npos) { 
+            lines.push_back(line);
         }
     }
 
     file.close();
 
-    // Rewrite the file without the removed doctor
+    // Rewrite the file
     file.open("patientsInfo.txt", ios::out);
 
-    for (const string& i : lines) {
-        file << i << endl;
+    if (!file) {
+        cerr << "File could not be opened for writing.\n";
+        return;
+    }
+
+    for (int i = 0; i < (int)lines.size(); i++) {
+        file << lines[i] << endl;
     }
 
     file.close();
@@ -52,25 +55,21 @@ void Admin::removeDoctor(const string& doctorName) {
     cout << "Doctor removed successfully.\n";
 }
 
-// Updates a patient's info using their DOB + Name to find the line
+// Updates patient information using MedicalInformation's modify function
 void Admin::updatePatient(const string& dob, const string& name, const string& newInfo) {
-    cout << "Updating patient info..." << endl;
-
-    // Uses MedicalInformation's modify function
+    cout << "Updating patient info...\n";
     medInfo.modifyInformation(dob, name, newInfo);
 }
 
-// Views a patient's information based on DOB + Name
+// Views patient information using MedicalInformation's get function
 void Admin::viewPatients(const string& dob, const string& name) {
     cout << "Fetching patient info...\n";
-
-    // Uses MedicalInformation's get function
     medInfo.getInformation(dob, name);
 }
 
-// Shows the admin's personal information
+// Displays admin details
 void Admin::displayInfo() const {
     cout << "\n--- ADMIN INFO ---\n";
-    cout << "Name: " << adminName << endl;
-    cout << "ID: " << adminID << endl;
+    cout << "Admin Name: " << adminName << endl;
+    cout << "Admin ID: " << adminID << endl;
 }
