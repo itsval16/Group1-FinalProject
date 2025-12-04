@@ -1,4 +1,4 @@
-// MedicalInformaion.h
+// MedicalInformation.h
 #ifndef MEDICALINFORMATION_H
 #define MEDICALINFORMATION_H
 
@@ -8,14 +8,19 @@
 using namespace std;
 
 class MedicalInformation {
-	protected:
-		fstream medicalInfo;
-	public:
-		void addInformation(const string& info); //adds new medinfo
-		void modifyInformation(const string& dob, const string& name, const string& newInfo); //controls mods
-		void getInformation(const string& dob, const string& name); //displays medinfo (can be looked up)
+protected:
+    fstream medicalInfo;
+
+public:
+    void addInformation(const string& info);
+    void modifyInformation(const string& dob, const string& name, const string& newInfo);
+    void getInformation(const string& dob, const string& name);
+
+    // Virtual destructor for safety with inheritance
+    virtual ~MedicalInformation() {}
 };
 
 #endif
+
 
 
