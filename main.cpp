@@ -1,29 +1,25 @@
-//this is to text out the Medicalinformation cpp and h files and go from there
+// MedicalInformation.h
+#ifndef MEDICALINFORMATION_H
+#define MEDICALINFORMATION_H
 
 #include <iostream>
+#include <fstream>
 #include <string>
-#include "MedicalInformation.h"
-
 using namespace std;
 
-int main() {
-    MedicalInformation medInfo;
-    string input;
+class MedicalInformation {
+protected:
+    fstream medicalInfo;
 
-    cout << "Welcome to the Medical Information System!" << endl;
+public:
+    void addInformation(const string& info);
+    void modifyInformation(const string& dob, const string& name, const string& newInfo);
+    void getInformation(const string& dob, const string& name);
 
-    while (true) {
-        cout << "\nEnter patient information (or type 'exit' to quit): ";
-        getline(cin, input);
-
-        if (input == "exit") {
-            cout << "Exiting program. Goodbye!" << endl;
-            break;
-        }
-
-        medInfo.addInformation(input);
-        cout << "Information saved successfully!" << endl;
-    }
-
-    return 0;
+    // Virtual destructor for safety with inheritance
+    virtual ~MedicalInformation() {}
 };
+
+#endif
+
+
