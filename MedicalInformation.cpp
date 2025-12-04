@@ -76,3 +76,4 @@ void MedicalInformation::modifyInformation(const string& dob, const string& name
     
     medicalInfo.close();
 }
+
