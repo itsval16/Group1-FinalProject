@@ -63,3 +63,4 @@ void Patient::savefile() {
     outfile << "Phone: "     << phoneNumber << "\n";
     outfile << "Email: "     << email       << "\n";
     outfile << "-----------------------------\n";
+}
