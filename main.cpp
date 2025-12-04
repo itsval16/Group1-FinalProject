@@ -1,7 +1,29 @@
-// main.cpp
+//this is to text out the Medicalinformation cpp and h files and go from there
 
+#include <iostream>
+#include <string>
 #include "MedicalInformation.h"
-#include "Patient.h"
-#include "Doctor.h"
-#include "Admin.h"
-#include "Appointment.h"
+
+using namespace std;
+
+int main() {
+    MedicalInformation medInfo;
+    string input;
+
+    cout << "Welcome to the Medical Information System!" << endl;
+
+    while (true) {
+        cout << "\nEnter patient information (or type 'exit' to quit): ";
+        getline(cin, input);
+
+        if (input == "exit") {
+            cout << "Exiting program. Goodbye!" << endl;
+            break;
+        }
+
+        medInfo.addInformation(input);
+        cout << "Information saved successfully!" << endl;
+    }
+
+    return 0;
+};
