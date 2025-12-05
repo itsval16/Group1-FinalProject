@@ -26,6 +26,7 @@ public:
 
     // ? Polymorphism (overrides base behavior)
     void displayInfo() const;
+    void getInformation(const string& dob, const string& name) override;
 
     // ? Getter functions for Doctor/Admin
     string getName() const;

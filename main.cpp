@@ -22,7 +22,7 @@ int main() {
     do {
         cout << "\nMain Menu\n";
         cout << "1. Register New Patient\n";
-        cout << "2. Display Patient Information\n";
+        cout << "2. Check Newly Registered Information\n";
         cout << "3. Register New Doctor\n";
         cout << "4. Display Doctor Information\n";
         cout << "5. Doctor Actions (View/Update Patient)\n";
@@ -47,10 +47,21 @@ int main() {
                 patient.registerPatient();
                 break;
 
-            case 2:
-                patient.displayInfo();
-                break;
+            case 2: {
+            	cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            	string pname,pdob;
+            	cout << "Enter name: ";
+                getline(cin, pname);
+                cout << endl;
 
+                cout << "Enter dob: ";
+                getline(cin, pdob);
+                cout << endl;
+
+                patient.getInformation(pdob,pname);
+                break;
+			}
+			
             case 3: {
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 string name, specialty;

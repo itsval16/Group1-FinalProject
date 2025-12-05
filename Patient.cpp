@@ -24,7 +24,7 @@ void Patient::registerPatient() {
 
         cout << "Enter gender: ";
         cin >> gender;
-        if (gender != 'm' || gender != 'M' || gender != 'f' || gender != 'F')
+        if (gender != 'm' && gender != 'M' && gender != 'f' && gender != 'F')
             throw runtime_error("Invalid gender entered.");
             
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -105,6 +105,14 @@ void Patient::displayInfo() const {
     }
 
     cout << "\n--------------------------------\n";
+}
+
+void Patient::getInformation(const string& dob, const string& name) {
+	if (this->name == name && this->dob == dob){
+		displayInfo();
+	} else {
+		cout << "INCORRECT INFORMATION. You sure that you?" << endl;
+	}
 }
 
 // Placeholder for appointment system (used later)
