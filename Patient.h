@@ -7,7 +7,7 @@
 
 using namespace std;
 
-class Patient : public MedicalInformation {   // ? Inheritance
+class Patient : public MedicalInformation {   
 private:
     string name;
     string dob;
@@ -27,26 +27,26 @@ private:
 public:
     Patient();
 
-    void registerPatient();        // ? adds new patient to file
-    void requestAppointment();     // ? later used with Appointment class
+    void registerPatient();       
+    void requestAppointment();    
 
-    // ? Polymorphism (overrides base behavior)
+   
     void displayInfo() const;
     void getInformation(const string& dob, const string& name) override;
 
-    // ? Getter functions for Doctor/Admin
+  
     string getName() const;
     string getDOB() const;
     string getDiagnosis() const;
     
-    // Parent information getters
+    
     bool hasParentInformation() const;
     string getParentName() const;
     string getParentRelationship() const;
     long long getParentPhone() const;
     
 private:
-    // Helper function to check insurance uniqueness
+  
     bool isInsuranceInfoUnique(const string& company, int number);
 };
 
