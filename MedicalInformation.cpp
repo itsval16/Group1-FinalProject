@@ -5,7 +5,7 @@
 #include <sstream>
 #include <stdexcept>
 
-// Adds new medical information
+//adds new medical information
 fstream MedicalInformation::medicalInfo;
 
 void MedicalInformation::addInformation(const string& info) {
@@ -23,7 +23,7 @@ void MedicalInformation::addInformation(const string& info) {
     }
 }
 
-// Retrieves medical information
+// retrives medical information
 void MedicalInformation::getInformation(const string& dob, const string& name) {
     try {
         medicalInfo.open("patientsInfo.txt", ios::in);
@@ -53,7 +53,7 @@ void MedicalInformation::getInformation(const string& dob, const string& name) {
     }
 }
 
-// Modifies existing medical record
+//mods medical record
 void MedicalInformation::modifyInformation(const string& dob, const string& name, const string& newInfo) {
     try {
         medicalInfo.open("patientsInfo.txt", ios::in);
