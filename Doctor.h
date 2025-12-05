@@ -11,29 +11,28 @@ class Doctor : public MedicalInformation {
 private:
     string name;
     string specialty;
-    int password;  // Could be used for authentication in the future
+    int password; 
 
 public:
-    // Constructors
-    Doctor();  // Default
-    Doctor(string name, string specialty, int password); // Parameterized
+    //constructors
+    Doctor(); 
+    Doctor(string name, string specialty, int password);
 
-    // Doctor actions
-    void viewPatient();             // Read patient info
-    void updatePatientRecord();     // Update patient info
+    //doc action
+    void viewPatient();             //read
+    void updatePatientRecord();     //update
 
-    // Display doctor info
-    virtual void displayInfo() const;  // Use const for display functions
 
-    // Operator overloads
+    virtual void displayInfo() const;  
+    
+    //operator overload
     bool operator==(const Doctor& other) const;
     friend ostream& operator<<(ostream& out, const Doctor& d);
 
-    // Getters
+    //getter
     string getName() const;
     string getSpecialty() const;
     
-    // Static function for creating doctors with validation
     static Doctor createDoctorWithValidation();
 };
 
