@@ -16,7 +16,7 @@ public:
     void modifyInformation(const string& dob, const string& name, const string& newInfo);
     virtual void getInformation(const string& dob, const string& name);
 
-    // Virtual destructor for safety with inheritance
+    //virtual destructor for safety with inheritance
     virtual ~MedicalInformation() {}
 
 };
