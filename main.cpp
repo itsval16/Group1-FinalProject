@@ -7,19 +7,25 @@
 
 using namespace std;
 
-int main() {
-    Patient patient;
-    Doctor doctor;
+int main() { 
+//CREATES CLASSES FOR THE MED INFO SYSTEM - VAL
+    Patient patient; //OBJ FOR ALL PATIENT INFO
+    Doctor doctor; //OBJ FOR ALL DOC INFO
     Appointment appointment;
     Admin admin("SuperAdmin", 1); // default admin
 
-    int choice;
+    int choice; 	//Variable to store user's menu choices
 
+//display
     cout << "=========================================\n";
     cout << "   Welcome to the Medical Information System\n";
     cout << "=========================================\n";
 
-    do {
+    
+	//main menu
+	//contains a loop
+	//loop will break untill usr chooses from menu or exits 
+	do {
         cout << "\nMain Menu\n";
         cout << "1. Register New Patient\n";
         cout << "2. Check Newly Registered Information\n";
@@ -28,15 +34,18 @@ int main() {
         cout << "5. Doctor Actions (View/Update Patient)\n";
         cout << "6. Create Appointment\n";
         cout << "7. Display Appointment\n";
-        cout << "8. Check Appointment Availability\n";
+        cout << "8. Admin Actions\n";
         cout << "9. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
 
+//checks if the user's choices range from the menu 1-9 options 
         try {
             if (choice < 1 || choice > 9)
                 throw runtime_error("Invalid menu option.");
         }
+        //displays error messgae if it's not from 1-9
+        //will show the menu again to choose again
         catch (exception& e) {
             cout << e.what() << endl;
             continue;
@@ -44,41 +53,43 @@ int main() {
 
         switch (choice) {
             case 1:
-                patient.registerPatient();
+                patient.registerPatient(); //info for the patient's reg.
                 break;
 
-            case 2: {
-            	cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            	string pname,pdob;
+            case 2: { //new reg. patients 
+            //info will be checked 
+            	cin.ignore(numeric_limits<streamsize>::max(), '\n'); //clear input buffers
+            	string pname,pdob; //stores
             	cout << "Enter name: ";
-                getline(cin, pname);
+                getline(cin, pname);  
                 cout << endl;
 
                 cout << "Enter dob: ";
                 getline(cin, pdob);
                 cout << endl;
 
-                patient.getInformation(pdob,pname);
+                patient.getInformation(pdob,pname); // will store and display the info entered
                 break;
 			}
 			
             case 3:
-                // Use the static validation function
+                // reg new doc.
                 doctor = Doctor::createDoctorWithValidation();
                 cout << "Doctor registered successfully!\n";
                 break;
 
             case 4:
-                doctor.displayInfo();
+                doctor.displayInfo(); //call to display doc info
                 break;
 
-            case 5: {
+            case 5: { //doc action menu
                 int docChoice;
+				 //displays doc menu
                 cout << "\nDoctor Actions Menu\n";
                 cout << "1. View Patient Information\n";
                 cout << "2. Update Patient Record\n";
                 cout << "Enter your choice: ";
-                cin >> docChoice;
+                cin >> docChoice; //get doc choice
 
                 if (docChoice == 1)
                     doctor.viewPatient();
@@ -90,25 +101,26 @@ int main() {
             }
 
             case 6:
-                appointment.createAppointment();
-                appointment.saveAppointment();
+                appointment.createAppointment(); //new app.
+                appointment.saveAppointment(); //save app.
                 break;
 
             case 7:
-                appointment.displayAppointment();
+                appointment.displayAppointment(); //shows app. details 
                 break;
 
-            // In main.cpp, you could add to case 7 or create a new option:
-case 8: { // New option to check available slots
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+           
+case 8: { //admin option to check any app. that are avaliable 
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clears any inputs buffers
     
-    string doctorName, date;
-    
-    cout << "Enter Doctor Name: ";
+    string doctorName, date; //var. to store doc info
+	    
+    cout << "Enter Doctor Name (Dr.): ";
     getline(cin, doctorName);
     
+   //uses static 
     if (Appointment::validateName(doctorName)) {
-        cout << "Enter Date to Check (MM/DD/YYYY): ";
+        cout << "Enter Date to Check (MM/DD/YYYY): "; //will use DOB to validate 
         getline(cin, date);
         
         if (Appointment::validateDate(date)) {
