@@ -8,26 +8,26 @@
 
 using namespace std;
 
-// The Admin class controls high-level system actions
+//handles admin.cpp
 class Admin {
 private:
-    string adminName;           // Admin's name
-    int adminID;                // Admin's ID (like a login)
-    MedicalInformation medInfo; // Allows admin to access patient files
+    string adminName;        
+    int adminID;               
+    MedicalInformation medInfo; // allows for the admin to access patient files
 
 public:
-    // Constructor
+    // constructor HERE
     Admin(string name = "Admin", int id = 0);
 
-    // Doctor management
-    void addDoctor(const string& doctorInfo);       // Add a doctor to the system file
-    void removeDoctor(const string& doctorName);    // Remove doctor info from file
+    // doc mang.
+    void addDoctor(const string& doctorInfo);       // add doc
+    void removeDoctor(const string& doctorName);    // remove doc
 
-    // Patient management
-    void updatePatient(const string& dob, const string& name, const string& newInfo); // Update patient record
-    void viewPatients(const string& dob, const string& name);                          // View patient info
+    // patient mag.
+    void updatePatient(const string& dob, const string& name, const string& newInfo); // update
+    void viewPatients(const string& dob, const string& name);                          // view
 
-    // Display admin info
+    
     void displayInfo() const;
 };
 
