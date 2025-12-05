@@ -1,34 +1,36 @@
 #include "Admin.h"
 #include <iostream>
-#include <fstream>
+#include <fstream> //read/write (file operations)
 #include <vector>
 
 using namespace std;
 
-// Constructor initializes admin name and ID
+//admin is aggined with name and ID 
+//constructor is implemented in here
 Admin::Admin(string name, int id) {
     adminName = name;
     adminID = id;
 }
 
-// Adds a doctor to the system file
+// function to add the docs information
+//contains a string 
 void Admin::addDoctor(const string& doctorInfo) {
     cout << "Adding doctor to system..." << endl;
 
-    // Uses MedicalInformation's add function
+    //will be added to the med info function if it can add to file 
     fstream file("doctorsInfo.txt", ios::app);
     if (!file) {
-        cerr << "File could not be opened.\n";
+        cerr << "File could not be opened.\n"; //file wont be able to be opened
         return;
     }
-    file << doctorInfo;
+    file << doctorInfo; //will write the doc info here!
 
     cout << "Doctor added successfully.\n";
     
-    file.close();
+    file.close(); //close file
 }
 
-// Removes a doctor by rewriting the file without their name
+// remove the doc
 void Admin::removeDoctor(const string& doctorName) {
     fstream file("doctorsInfo.txt", ios::in);  // Use a separate doctors file
     
@@ -40,16 +42,16 @@ void Admin::removeDoctor(const string& doctorName) {
     vector<string> lines;
     string line;
 
-    // Read file and store only lines that do NOT contain the doctor name
+    // will read the file and store only lines that do NOT contain the doctor name
     while (getline(file, line)) {
-        if (line.find(doctorName) == string::npos) { 
-            lines.push_back(line);
+        if (line.find(doctorName) == string::npos) { //will find the doc names here and remove name 
+            lines.push_back(line); //if not found it will be kept
         }
     }
 
-    file.close();
+    file.close(); //input file CLOSED
 
-    // Rewrite the file
+    // rewrites the file here
     file.open("doctorsInfo.txt", ios::out);
 
     if (!file) {
@@ -58,27 +60,27 @@ void Admin::removeDoctor(const string& doctorName) {
     }
 
     for (size_t i = 0; i < lines.size(); i++) {
-        file << lines[i] << endl;
+        file << lines[i] << endl; //writes all the kept lines back onto the file 
     }
 
-    file.close();
+    file.close(); //file CLOSED
 
     cout << "Doctor removed successfully.\n";
 }
 
-// Updates patient information using MedicalInformation's modify function
+// updates patient information using medinfo modify function
 void Admin::updatePatient(const string& dob, const string& name, const string& newInfo) {
     cout << "Updating patient info...\n";
     medInfo.modifyInformation(dob, name, newInfo);
 }
 
-// Views patient information using MedicalInformation's get function
+// views patient information using medinfo get function
 void Admin::viewPatients(const string& dob, const string& name) {
     cout << "Fetching patient info...\n";
     medInfo.getInformation(dob, name);
 }
 
-// Displays admin details
+// display the admins info
 void Admin::displayInfo() const {
     cout << "\n--- ADMIN INFO ---\n";
     cout << "Admin Name: " << adminName << endl;
