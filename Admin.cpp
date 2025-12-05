@@ -16,9 +16,16 @@ void Admin::addDoctor(const string& doctorInfo) {
     cout << "Adding doctor to system..." << endl;
 
     // Uses MedicalInformation's add function
-    medInfo.addInformation(doctorInfo);
+    fstream file("doctorsInfo.txt", ios::app);
+    if (!file) {
+        cerr << "File could not be opened.\n";
+        return;
+    }
+    file << doctorInfo;
 
     cout << "Doctor added successfully.\n";
+    
+    file.close();
 }
 
 // Removes a doctor by rewriting the file without their name

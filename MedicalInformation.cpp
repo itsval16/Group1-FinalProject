@@ -35,8 +35,6 @@ void MedicalInformation::getInformation(const string& dob, const string& name) {
         bool found = false;
 
         while (getline(medicalInfo, line)) {
-            stringstream ss(line);   // REQUIRED stringstream usage
-
             if (line.find(dob) != string::npos && line.find(name) != string::npos) {
                 cout << "\nMedical Record Found:\n";
                 cout << line << endl;
@@ -68,13 +66,18 @@ void MedicalInformation::modifyInformation(const string& dob, const string& name
         bool modified = false;
 
         while (getline(medicalInfo, line)) {
-            if (line.find(dob) != string::npos && line.find(name) != string::npos) {
-                lines.push_back(newInfo);
-                modified = true;
-            }
-            else {
-                lines.push_back(line);
-            }
+			stringstream ss(line);
+			string curDOB, curName;
+			
+			getline(ss,curName, ',');
+			getline(ss,curDOB, ',');
+			
+			if (curName == name && curDOB == dob){
+				lines.push_back(newInfo);
+				modified = true;
+			}	else {
+				lines.push_back(line);
+			}
         }
 
         medicalInfo.close();
