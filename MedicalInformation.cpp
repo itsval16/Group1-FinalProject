@@ -6,6 +6,8 @@
 #include <stdexcept>
 
 // Adds new medical information
+fstream MedicalInformation::medicalInfo;
+
 void MedicalInformation::addInformation(const string& info) {
     try {
         medicalInfo.open("patientsInfo.txt", ios::app);

@@ -1,8 +1,11 @@
 // Appointment.cpp
 #include "Appointment.h"
+#include <iostream>
+#include <fstream>
 #include <limits>
+using namespace std;
 
-// Defining a default constructor
+// Default constructor
 Appointment::Appointment() {
     patientName = "";
     doctorName = "";
@@ -11,7 +14,7 @@ Appointment::Appointment() {
     reason = "";
 }
 
-// Constructor with the parameters
+// Parameterized constructor
 Appointment::Appointment(string p, string d, string da, string ti, string r) {
     patientName = p;
     doctorName = d;
@@ -20,12 +23,11 @@ Appointment::Appointment(string p, string d, string da, string ti, string r) {
     reason = r;
 }
 
-// Creates an appointment by asking the user for all info
+// Create an appointment by asking the user for all info
 void Appointment::createAppointment() {
-    // Clears any leftover newline characters so the getline command works properly
+    // Clear input buffer to avoid skipping getline
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-    // Collect basic appointment information
     cout << "Enter Patient Name: ";
     getline(cin, patientName);
 
@@ -40,29 +42,33 @@ void Appointment::createAppointment() {
 
     cout << "Reason for Visit: ";
     getline(cin, reason);
+
+    cout << "\nAppointment created successfully!\n";
 }
 
-// Saves appointment to appointments.txt file
+// Save appointment to file
 void Appointment::saveAppointment() const {
-    ofstream file("appointments.txt", ios::app);  // open for appending
+    try {
+        ofstream file("appointments.txt", ios::app);  // open for appending
 
-    if (!file) {
-        cerr << "Error opening appointments.txt\n";
-        return;
+        if (!file)
+            throw runtime_error("Could not open appointments.txt for writing.");
+
+        file << "PATIENT: " << patientName << "\n";
+        file << "DOCTOR: " << doctorName << "\n";
+        file << "DATE: " << date << "\n";
+        file << "TIME: " << time << "\n";
+        file << "REASON: " << reason << "\n";
+        file << "---------------------------\n";
+
+        file.close();
     }
-
-    // Write the appointment details into the file
-    file << "PATIENT: " << patientName << "\n";
-    file << "DOCTOR: " << doctorName << "\n";
-    file << "DATE: " << date << "\n";
-    file << "TIME: " << time << "\n";
-    file << "REASON: " << reason << "\n";
-    file << "---------------------------\n";
-
-    file.close(); // close the file after writing
+    catch (exception& e) {
+        cerr << "Error saving appointment: " << e.what() << endl;
+    }
 }
 
-// Displays appointment information to the screen when called
+// Display appointment information
 void Appointment::displayAppointment() const {
     cout << "\n--- APPOINTMENT DETAILS ---\n";
     cout << "Patient: " << patientName << endl;

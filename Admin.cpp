@@ -1,5 +1,9 @@
 #include "Admin.h"
+#include <iostream>
+#include <fstream>
 #include <vector>
+
+using namespace std;
 
 // Constructor initializes admin name and ID
 Admin::Admin(string name, int id) {
@@ -19,7 +23,7 @@ void Admin::addDoctor(const string& doctorInfo) {
 
 // Removes a doctor by rewriting the file without their name
 void Admin::removeDoctor(const string& doctorName) {
-    fstream file("patientsInfo.txt", ios::in);
+    fstream file("doctorsInfo.txt", ios::in);  // Use a separate doctors file
     
     if (!file) {
         cerr << "File could not be opened.\n";
@@ -39,14 +43,14 @@ void Admin::removeDoctor(const string& doctorName) {
     file.close();
 
     // Rewrite the file
-    file.open("patientsInfo.txt", ios::out);
+    file.open("doctorsInfo.txt", ios::out);
 
     if (!file) {
         cerr << "File could not be opened for writing.\n";
         return;
     }
 
-    for (int i = 0; i < (int)lines.size(); i++) {
+    for (size_t i = 0; i < lines.size(); i++) {
         file << lines[i] << endl;
     }
 

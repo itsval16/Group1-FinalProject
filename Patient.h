@@ -2,21 +2,35 @@
 #define PATIENT_H
 
 #include <string>
+#include <vector>
+#include "MedicalInformation.h"
+
 using namespace std;
 
-class Patient {
+class Patient : public MedicalInformation {   // ? Inheritance
 private:
     string name;
     string dob;
-    string sex;
-    string insurance;
-    string phoneNumber;
-    string email;
+    char gender;
+    string insuranceCompany;
+    string diagnosis;
+    int age;
+    int insuranceNum;
+    vector<string> medication;
 
 public:
-    void registerPatient();
+    Patient();
+
+    void registerPatient();        // ? adds new patient to file
+    void requestAppointment();     // ? later used with Appointment class
+
+    // ? Polymorphism (overrides base behavior)
     void displayInfo() const;
-    void savefile();
+
+    // ? Getter functions for Doctor/Admin
+    string getName() const;
+    string getDOB() const;
+    string getDiagnosis() const;
 };
 
 #endif

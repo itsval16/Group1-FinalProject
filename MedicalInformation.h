@@ -9,7 +9,7 @@ using namespace std;
 
 class MedicalInformation {
 protected:
-    fstream medicalInfo;
+    static fstream medicalInfo;
 
 public:
     void addInformation(const string& info);
@@ -21,6 +21,3 @@ public:
 };
 
 #endif
-
-
-
