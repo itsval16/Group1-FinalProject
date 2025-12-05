@@ -28,7 +28,7 @@ int main() {
         cout << "5. Doctor Actions (View/Update Patient)\n";
         cout << "6. Create Appointment\n";
         cout << "7. Display Appointment\n";
-        cout << "8. Admin Actions\n";
+        cout << "8. Check Appointment Availability\n";
         cout << "9. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
