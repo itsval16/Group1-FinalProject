@@ -17,6 +17,12 @@ private:
     int age;
     int insuranceNum;
     vector<string> medication;
+    
+    // Parent information for patients under 18
+    string parentName;
+    string parentRelationship;
+    long long parentPhone;
+    bool hasParentInfo;
 
 public:
     Patient();
@@ -32,6 +38,16 @@ public:
     string getName() const;
     string getDOB() const;
     string getDiagnosis() const;
+    
+    // Parent information getters
+    bool hasParentInformation() const;
+    string getParentName() const;
+    string getParentRelationship() const;
+    long long getParentPhone() const;
+    
+private:
+    // Helper function to check insurance uniqueness
+    bool isInsuranceInfoUnique(const string& company, int number);
 };
 
 #endif
