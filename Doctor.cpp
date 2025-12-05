@@ -6,21 +6,21 @@
 #include <cctype>
 using namespace std;
 
-// Default constructor
+//constructor
 Doctor::Doctor() {
     name = "";
     specialty = "";
     password = 0;
 }
 
-// Parameterized constructor
+//parameterized constructor
 Doctor::Doctor(string n, string s, int p) {
     name = n;
     specialty = s;
     password = p;
 }
 
-// Display doctor info
+
 void Doctor::displayInfo() const {
     cout << "\n----- Doctor Information -----\n";
     cout << "Name: " << name << endl;
@@ -28,7 +28,7 @@ void Doctor::displayInfo() const {
     cout << "-------------------------------\n";
 }
 
-// View patient info
+//view patient info
 void Doctor::viewPatient() {
     string patientName, dob;
 
@@ -36,7 +36,7 @@ void Doctor::viewPatient() {
     cout << "Enter the patient's full name to view: ";
     getline(cin, patientName);
 
-    // Validate patient name format
+    
     bool validPatientName = true;
     for (char c : patientName) {
         if (!isalpha(c) && c != ' ' && c != '.') {
@@ -53,7 +53,7 @@ void Doctor::viewPatient() {
     cout << "Enter the patient's DOB (MM/DD/YYYY): ";
     getline(cin, dob);
 
-    // Validate DOB format
+   
     bool validDOB = true;
     if (dob.length() != 10 || dob[2] != '/' || dob[5] != '/') {
         cout << "Invalid date format. Use MM/DD/YYYY with slashes (/).\n";
@@ -73,19 +73,19 @@ void Doctor::viewPatient() {
     }
     
     if (validDOB) {
-        getInformation(dob, patientName);  // Pass both name and DOB
+        getInformation(dob, patientName);  
     }
 }
 
-// Update patient record
+
 void Doctor::updatePatientRecord() {
     string patientName, dob, newInfo;
 
-    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Clear input buffer
+    cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
     cout << "Enter the patient's full name to update: ";
     getline(cin, patientName);
 
-    // Validate patient name format
+  
     bool validPatientName = true;
     for (char c : patientName) {
         if (!isalpha(c) && c != ' ' && c != '.') {
@@ -102,7 +102,7 @@ void Doctor::updatePatientRecord() {
     cout << "Enter the patient's DOB (MM/DD/YYYY): ";
     getline(cin, dob);
 
-    // Validate DOB format
+
     bool validDOB = true;
     if (dob.length() != 10 || dob[2] != '/' || dob[5] != '/') {
         cout << "Invalid date format. Use MM/DD/YYYY with slashes (/).\n";
@@ -128,27 +128,25 @@ void Doctor::updatePatientRecord() {
     cout << "Enter the updated information (CSV format): ";
     getline(cin, newInfo);
 
-    // Validate CSV format has basic structure
+
     if (newInfo.find(',') == string::npos) {
         cout << "Invalid CSV format. Information should be comma-separated.\n";
         return;
     }
 
-    modifyInformation(dob, patientName, newInfo);  // Pass both name and DOB
+    modifyInformation(dob, patientName, newInfo);  
 }
 
-// Equality operator
 bool Doctor::operator==(const Doctor& other) const {
     return name == other.name && specialty == other.specialty;
 }
 
-// Stream output
 ostream& operator<<(ostream& out, const Doctor& d) {
     out << "Doctor: " << d.name << " (" << d.specialty << ")";
     return out;
 }
 
-// Getters
+//getter
 string Doctor::getName() const {
     return name;
 }
@@ -156,15 +154,13 @@ string Doctor::getName() const {
 string Doctor::getSpecialty() const {
     return specialty;
 }
-
-// Static function for creating doctors with validation
 Doctor Doctor::createDoctorWithValidation() {
     string name, specialty;
     int password;
     
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     
-    // Name validation (letters and spaces only)
+//letter and space
     bool validName = false;
     while (!validName) {
         cout << "Enter doctor's name: ";
@@ -185,7 +181,7 @@ Doctor Doctor::createDoctorWithValidation() {
         }
     }
     
-    // Specialty validation (letters and spaces only)
+//letter an dspace
     bool validSpecialty = false;
     while (!validSpecialty) {
         cout << "Enter doctor's specialty: ";
@@ -206,14 +202,13 @@ Doctor Doctor::createDoctorWithValidation() {
         }
     }
     
-    // Password validation (numeric, 4-8 digits)
+//password
     bool validPassword = false;
     while (!validPassword) {
         cout << "Enter doctor's password (4-8 digits): ";
         string passwordInput;
         getline(cin, passwordInput);
         
-        // Check if all characters are digits
         bool isNumeric = true;
         for (char c : passwordInput) {
             if (!isdigit(c)) {
@@ -241,3 +236,4 @@ Doctor Doctor::createDoctorWithValidation() {
     
     return Doctor(name, specialty, password);
 }
+
