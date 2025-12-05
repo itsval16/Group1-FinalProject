@@ -32,6 +32,9 @@ public:
     // Getters
     string getName() const;
     string getSpecialty() const;
+    
+    // Static function for creating doctors with validation
+    static Doctor createDoctorWithValidation();
 };
 
 #endif
