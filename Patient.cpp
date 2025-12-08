@@ -475,7 +475,3 @@ string Patient::getParentRelationship() const {
 long long Patient::getParentPhone() const {
     return parentPhone;
 }
-
-long long Patient::getParentPhone() const {
-    return parentPhone;
-}
